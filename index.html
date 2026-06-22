@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Azkar — Daily Duas</title>
+<meta name="description" content="Morning, Evening, Sleep, Sorrow and more duas — Arabic with Bangla & English. Works offline."/>
+<meta name="theme-color" content="#0d1033"/>
+
+<!-- Web App Manifest — required for "Install App" / Add to Home Screen -->
+<link rel="manifest" href="manifest.json"/>
+
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+
+<!-- iOS Safari "Add to Home Screen" support -->
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Azkar"/>
+
+<!-- Windows tile -->
+<meta name="msapplication-TileColor" content="#0d1033"/>
+<meta name="msapplication-TileImage" content="icon-192.png"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&family=Noto+Serif+Bengali:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:#0d1033;color:#fff;-webkit-font-smoothing:antialiased;user-select:none;-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;cursor:pointer;border:0;background:0;padding:0;color:inherit}
+:root{--acc:#c19a3e;--acc2:#ffd27a;--nav:#050618ee;--cb:rgba(255,255,255,.07);--cbr:rgba(255,255,255,.12);--t1:#fff;--t2:rgba(255,255,255,.65);--t3:rgba(255,255,255,.38);--fs:1}
+.t-fajr{--acc:#ffd27a;--acc2:#ffb060;--nav:#1a0a2aee}
+.t-dhuhr{--acc:#ffe082;--acc2:#ffb300;--nav:#1a3a5aee}
+.t-asr{--acc:#bce394;--acc2:#8acd4a;--nav:#1a3a2aee}
+.t-maghrib{--acc:#ff9a5a;--acc2:#ffb070;--nav:#1a0a05ee}
+.t-isha{--acc:#a8b8e0;--acc2:#7890c8;--nav:#050618ee}
+.t-parch{--acc:#8b5e1a;--acc2:#b07820;--nav:rgba(230,205,155,.97);--cb:rgba(255,248,230,.82);--cbr:rgba(180,140,70,.3);--t1:#2a1808;--t2:rgba(42,24,8,.62);--t3:rgba(42,24,8,.35)}
+.app{position:relative;height:100dvh;display:flex;flex-direction:column;background:linear-gradient(160deg,var(--sky-a,#050618) 0%,var(--sky-b,#15163a) 50%,var(--sky-c,#2a2870) 100%);overflow:hidden;transition:background 1.2s}
+.t-fajr{--sky-a:#1a0a2a;--sky-b:#3a1a4a;--sky-c:#7a4a6a}
+.t-dhuhr{--sky-a:#1a3a5a;--sky-b:#3a6a9a;--sky-c:#e0a06a}
+.t-asr{--sky-a:#1a3a2a;--sky-b:#2a5a3a;--sky-c:#6a9a4a}
+.t-maghrib{--sky-a:#1a0a05;--sky-b:#5a2010;--sky-c:#c05020}
+.t-isha{--sky-a:#050618;--sky-b:#15163a;--sky-c:#2a2870}
+.t-parch{--sky-a:#b89050;--sky-b:#d8b070;--sky-c:#f0d898}
+
+/* SCENE HEADER */
+.scene-hdr{position:relative;flex-shrink:0;height:clamp(150px,26vh,230px);overflow:hidden}
+.scene-svg{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1.5s;pointer-events:none}
+.scene-svg.active{opacity:1}
+.topbar{position:absolute;top:0;left:0;right:0;z-index:20;display:flex;align-items:flex-start;justify-content:space-between;padding:max(12px,env(safe-area-inset-top)) 16px 8px}
+.tb-left .greet{font-family:'Noto Naskh Arabic',serif;font-size:clamp(14px,3.8vw,18px);font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.tb-left .dt{font-size:10.5px;font-weight:500;letter-spacing:.06em;color:rgba(255,255,255,.7);margin-top:2px}
+.tbr{display:flex;gap:7px}
+.icon-btn{width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.3);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;color:#fff;transition:background .2s;flex-shrink:0}
+.icon-btn:hover{background:rgba(0,0,0,.44)}
+.scene-foot{position:absolute;bottom:0;left:0;right:0;z-index:10;padding:0 16px 9px;background:linear-gradient(0deg,rgba(0,0,0,.35),transparent)}
+.tagline{font-size:10.5px;font-weight:600;letter-spacing:.1em;color:rgba(255,255,255,.7);text-transform:uppercase}
+
+/* BODY */
+.scroll-body{flex:1;overflow-y:auto;overflow-x:hidden;padding:0 0 84px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.scroll-body::-webkit-scrollbar{display:none}
+
+/* PROGRESS SUMMARY */
+.prog-bar-wrap{margin:10px 14px 0;background:var(--cb);border:1px solid var(--cbr);border-radius:16px;padding:12px 14px}
+.prog-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.prog-title{font-size:11.5px;font-weight:700;color:var(--t2);letter-spacing:.04em}
+.prog-count{font-size:11.5px;font-weight:700;color:var(--acc)}
+.prog-track{height:5px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;background:var(--acc);border-radius:99px;transition:width .5s cubic-bezier(.34,1.2,.64,1)}
+
+/* SEARCH */
+.search-wrap{padding:10px 14px 0;position:relative}
+.search-inp{width:100%;background:var(--cb);border:1px solid var(--cbr);border-radius:13px;padding:9px 14px 9px 38px;font-size:13.5px;font-weight:500;color:var(--t1);outline:none;font-family:'Inter',sans-serif;transition:border-color .2s}
+.search-inp::placeholder{color:var(--t3)}
+.search-inp:focus{border-color:var(--acc)}
+.search-ico{position:absolute;left:25px;top:50%;transform:translateY(-50%);color:var(--t3);pointer-events:none}
+.t-parch .search-inp{background:rgba(139,94,26,.08);border-color:rgba(139,94,26,.2)}
+
+/* SECTION BLOCKS (list mode, no swiping) */
+.section-block{margin-top:6px}
+.section-block-hdr{display:flex;align-items:center;gap:10px;padding:14px 16px 9px;cursor:pointer}
+.section-block-ico{width:34px;height:34px;border-radius:11px;background:var(--cb);border:1px solid var(--cbr);display:grid;place-items:center;font-size:17px;flex-shrink:0}
+.section-block-info{flex:1;min-width:0}
+.section-block-name{font-size:14px;font-weight:800;color:var(--t1)}
+.section-block-sub{font-size:11px;color:var(--t2);margin-top:1px}
+.section-block-pct{font-size:12.5px;font-weight:700;color:var(--acc);flex-shrink:0}
+.section-block-chev{color:var(--t3);transition:transform .25s;flex-shrink:0}
+.section-block.collapsed .section-block-chev{transform:rotate(-90deg)}
+.section-block-items{overflow:hidden;max-height:none;transition:max-height .3s ease}
+.section-block.collapsed .section-block-items{max-height:0}
+
+/* LIST ITEMS */
+.li{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.055);cursor:pointer;transition:background .15s;position:relative}
+.t-parch .li{border-color:rgba(139,94,26,.1)}
+.li:active{background:rgba(255,255,255,.07)}
+.t-parch .li:active{background:rgba(139,94,26,.08)}
+.li-ico{width:38px;height:38px;border-radius:12px;flex-shrink:0;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;color:var(--t3)}
+.li-ico-emoji{font-size:15px;line-height:1}
+.li-ico-num{font-size:8.5px;font-weight:700;letter-spacing:.04em;opacity:.7}
+.li-body{flex:1;min-width:0}
+.li-ar{font-family:'Noto Naskh Arabic',serif;font-size:calc(14.5px * var(--fs));font-weight:700;color:var(--t1);direction:rtl;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li-tr{font-size:calc(11px * var(--fs));font-weight:500;color:var(--t2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li-tr.bn{font-family:'Noto Serif Bengali',serif;font-size:calc(11.5px * var(--fs))}
+.li-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.li-badge{font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.04em}
+.li-check{width:19px;height:19px;border-radius:50%;background:var(--acc);display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.li-partial{width:19px;height:19px;border-radius:50%;border:2px solid var(--acc);display:grid;place-items:center;background:transparent}
+.li-partial-inner{width:7px;height:7px;border-radius:50%;background:var(--acc)}
+
+/* ── POPUP MODAL DETAIL (card popup, not full swipe) ── */
+.modal-backdrop{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;padding:18px;pointer-events:none;transition:background .25s}
+.modal-backdrop.open{background:rgba(0,0,0,.6);pointer-events:all}
+.modal-card{
+  width:100%;max-width:440px;max-height:86vh;
+  background:linear-gradient(160deg,var(--sky-a,#050618) 0%,var(--sky-b,#15163a) 55%,var(--sky-c,#2a2870) 100%);
+  border-radius:26px;border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:scale(.88) translateY(30px);opacity:0;
+  transition:transform .3s cubic-bezier(.34,1.3,.64,1),opacity .25s;
+}
+.modal-backdrop.open .modal-card{transform:scale(1) translateY(0);opacity:1}
+.modal-top{display:flex;align-items:center;gap:10px;padding:16px 16px 10px;flex-shrink:0}
+.modal-back{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;color:#fff;flex-shrink:0}
+.modal-ti{flex:1;min-width:0}
+.modal-cat{font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);opacity:.85}
+.modal-name{font-size:13.5px;font-weight:700;color:var(--t1);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.modal-lang{display:flex;gap:3px;background:rgba(255,255,255,.08);border-radius:9px;padding:3px;flex-shrink:0}
+.modal-lang-b{padding:5px 10px;border-radius:7px;font-size:11.5px;font-weight:700;color:var(--t2);transition:all .18s}
+.modal-lang-b.active{background:rgba(255,255,255,.18);color:var(--t1)}
+.modal-scroll{flex:1;overflow-y:auto;padding:4px 16px 14px;scrollbar-width:none}
+.modal-scroll::-webkit-scrollbar{display:none}
+.ar-card{background:var(--cb);backdrop-filter:blur(20px);border:1px solid var(--cbr);border-radius:18px;padding:18px 16px 14px;margin-bottom:10px;text-align:right;direction:rtl}
+.ar-txt{font-family:'Noto Naskh Arabic',serif;font-size:calc(23px * var(--fs));font-weight:700;color:var(--t1);line-height:1.95;text-shadow:0 1px 4px rgba(0,0,0,.2)}
+.ar-div{height:1px;background:linear-gradient(90deg,transparent,var(--cbr) 50%,transparent);margin:10px 0;direction:ltr}
+.tr-card{background:var(--cb);backdrop-filter:blur(20px);border:1px solid var(--cbr);border-radius:18px;padding:14px 15px;margin-bottom:10px}
+.tr-lbl{font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin-bottom:7px;opacity:.85}
+.tr-txt{font-size:calc(13.5px * var(--fs));font-weight:600;color:var(--t1);line-height:1.7}
+.tr-txt.bn{font-family:'Noto Serif Bengali',serif;font-size:calc(13.5px * var(--fs));line-height:1.85}
+.ref-l{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-top:8px;padding-top:8px;border-top:1px solid var(--cbr)}
+.cnt-card{background:var(--cb);backdrop-filter:blur(20px);border:1px solid var(--cbr);border-radius:18px;padding:16px;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.ring-w{position:relative;width:104px;height:104px;display:flex;align-items:center;justify-content:center}
+.ring-svg{position:absolute;inset:0;width:104px;height:104px;transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:rgba(255,255,255,.1);stroke-width:6}
+.ring-fill{fill:none;stroke:var(--acc);stroke-width:6;stroke-linecap:round;stroke-dasharray:269;stroke-dashoffset:269;transition:stroke-dashoffset .4s cubic-bezier(.34,1.4,.64,1),stroke .3s}
+.ring-fill.done{stroke:var(--acc2)}
+.tap-btn{position:relative;z-index:1;width:76px;height:76px;border-radius:50%;background:linear-gradient(145deg,var(--acc),color-mix(in srgb,var(--acc) 65%,#000 35%));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;box-shadow:0 6px 22px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .12s;overflow:hidden}
+.tap-btn:active{transform:scale(.87)}
+.tap-btn::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.45) 0%,transparent 60%);opacity:0;transition:opacity .5s}
+.tap-btn.pulse::after{opacity:1;transition:none}
+.tap-btn.bounce{animation:cB .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes cB{0%{transform:scale(1)}40%{transform:scale(.86)}70%{transform:scale(1.1)}100%{transform:scale(1)}}
+.tap-n{font-family:'Inter',sans-serif;font-size:27px;font-weight:800;color:#fff;line-height:1}
+.tap-n.pop{animation:nP .28s cubic-bezier(.34,1.56,.64,1)}
+@keyframes nP{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}
+.tap-l{font-size:8.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.cnt-meta{display:flex;flex-direction:column;align-items:center;gap:8px}
+.tgt-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:8px 16px;text-align:center}
+.tgt-l{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);margin-bottom:2px}
+.tgt-n{font-size:22px;font-weight:800;color:var(--t1);line-height:1}
+.rst-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:11px;padding:7px 14px;font-size:11.5px;font-weight:700;color:var(--t2);letter-spacing:.04em;transition:all .2s}
+.rst-btn:hover{background:rgba(255,255,255,.13)}
+.dua-tag{display:flex;justify-content:center;padding:6px 0 2px}
+.dua-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:7px 16px;font-size:12px;font-weight:700;color:var(--t2)}
+.modal-nav{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 14px;flex-shrink:0;gap:8px}
+.mn-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:8px 14px;color:#fff;font-size:12px;font-weight:700;transition:all .2s;flex-shrink:0}
+.mn-btn:disabled{opacity:.3;cursor:not-allowed}
+.mn-btn:not(:disabled):hover{background:rgba(255,255,255,.18)}
+.mn-ctr{font-size:11px;font-weight:600;color:var(--t3);text-align:center;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* PROGRESS SCREEN (also popup style) */
+.prog-screen{position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .35s cubic-bezier(.34,1.1,.64,1);background:linear-gradient(160deg,var(--sky-a,#050618) 0%,var(--sky-b,#15163a) 50%,var(--sky-c,#2a2870) 100%)}
+.prog-screen.open{transform:translateY(0)}
+.prog-screen-top{display:flex;align-items:center;gap:11px;padding:max(14px,env(safe-area-inset-top)) 16px 11px;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.07)}
+.prog-screen-title{font-size:17px;font-weight:800;color:var(--t1)}
+.prog-screen-body{flex:1;overflow-y:auto;padding:16px 14px max(24px,env(safe-area-inset-bottom));scrollbar-width:none}
+.prog-screen-body::-webkit-scrollbar{display:none}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.stat-card{background:var(--cb);border:1px solid var(--cbr);border-radius:16px;padding:14px 12px;text-align:center}
+.stat-num{font-size:26px;font-weight:800;color:var(--acc);line-height:1}
+.stat-lbl{font-size:10.5px;font-weight:600;color:var(--t2);margin-top:4px;letter-spacing:.04em}
+.prog-cat-card{background:var(--cb);border:1px solid var(--cbr);border-radius:16px;padding:14px 15px;margin-bottom:10px;cursor:pointer;transition:background .18s}
+.prog-cat-card:active{background:rgba(255,255,255,.1)}
+.prog-cat-row{display:flex;align-items:center;gap:11px;margin-bottom:9px}
+.prog-cat-ico{font-size:20px}
+.prog-cat-info{flex:1}
+.prog-cat-name{font-size:14px;font-weight:700;color:var(--t1)}
+.prog-cat-sub{font-size:11.5px;color:var(--t2);margin-top:2px}
+.prog-cat-pct{font-size:13px;font-weight:800;color:var(--acc)}
+.prog-cat-bar{height:5px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden}
+.prog-cat-fill{height:100%;border-radius:99px;background:var(--acc);transition:width .6s cubic-bezier(.34,1.2,.64,1)}
+.prog-items-list{margin-top:8px}
+.prog-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.prog-item:last-child{border-bottom:0}
+.prog-item-ar{font-family:'Noto Naskh Arabic',serif;font-size:calc(13px * var(--fs));font-weight:700;color:var(--t1);flex:1;direction:rtl;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog-item-cnt{font-size:11px;font-weight:700;color:var(--t3);flex-shrink:0}
+.reset-all-btn{width:100%;background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.25);border-radius:14px;padding:13px;font-size:13.5px;font-weight:700;color:rgba(255,120,120,.9);margin-top:14px;transition:all .2s}
+.reset-all-btn:hover{background:rgba(255,80,80,.18)}
+
+/* BOTTOM NAV */
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:40;background:var(--nav);backdrop-filter:blur(22px);border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-around;padding:7px 0 max(11px,env(safe-area-inset-bottom))}
+.ni{display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 12px;font-size:10px;font-weight:700;letter-spacing:.04em;color:var(--t3);transition:color .18s;position:relative}
+.ni.active{color:var(--acc)}
+.ni svg{transition:transform .2s}
+.ni.active svg{transform:scale(1.12)}
+.ni-badge{position:absolute;top:1px;right:8px;min-width:16px;height:16px;border-radius:99px;background:var(--acc);color:#fff;font-size:9px;font-weight:800;display:none;align-items:center;justify-content:center;padding:0 4px}
+.ni-badge.show{display:flex}
+
+/* SETTINGS */
+.sett{position:fixed;inset:0;z-index:60;display:flex;align-items:flex-end;background:rgba(0,0,0,0);pointer-events:none;transition:background .3s}
+.sett.open{background:rgba(0,0,0,.62);pointer-events:all}
+.sett-sh{width:100%;max-width:560px;margin:0 auto;background:#0e1240;border-radius:28px 28px 0 0;padding:0 0 max(22px,env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .4s cubic-bezier(.34,1.2,.64,1);box-shadow:0 -20px 60px rgba(0,0,0,.5);max-height:88vh;overflow-y:auto}
+.sett.open .sett-sh{transform:translateY(0)}
+.sh-hdl{width:40px;height:4px;border-radius:99px;background:rgba(255,255,255,.18);margin:14px auto 0}
+.sh-head{padding:13px 20px 11px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07)}
+.sh-title{font-size:16px;font-weight:800;color:#fff}
+.sh-close{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);display:grid;place-items:center}
+.sh-sec{padding:14px 20px 6px}
+.sh-sec-l{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:11px}
+.sh-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.sh-row:last-child{border-bottom:0}
+.sh-rl{font-size:14.5px;font-weight:600;color:#fff}
+.sh-rs{font-size:11.5px;color:rgba(255,255,255,.4);margin-top:1px}
+.s-seg{display:flex;gap:3px;background:rgba(255,255,255,.08);border-radius:10px;padding:3px}
+.s-b{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:700;color:rgba(255,255,255,.45);transition:all .18s}
+.s-b.active{background:rgba(255,255,255,.2);color:#fff}
+.fs-row{display:flex;align-items:center;gap:11px;padding:9px 0}
+.fs-l{font-size:13px;font-weight:700;color:rgba(255,255,255,.5);width:22px;text-align:center}
+.fs-sl{flex:1;height:4px;border-radius:99px;accent-color:var(--acc);cursor:pointer;-webkit-appearance:none;appearance:none;background:rgba(255,255,255,.15)}
+.fs-sl::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--acc);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.th-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:4px 0 6px}
+.th-btn{border-radius:15px;border:1.5px solid rgba(255,255,255,.1);padding:10px 11px;display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.05);cursor:pointer;transition:all .18s}
+.th-btn:hover{background:rgba(255,255,255,.1)}
+.th-btn.active{border-color:var(--acc);background:rgba(255,255,255,.12)}
+.th-dot{width:24px;height:24px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-size:13px}
+.th-name{font-size:12.5px;font-weight:700;color:#fff}
+.th-sub{font-size:10.5px;color:rgba(255,255,255,.38);margin-top:1px}
+.auto-btn{width:100%;border-radius:13px;border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);padding:10px 15px;margin-bottom:9px;display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;color:rgba(255,255,255,.65);transition:all .18s}
+.auto-btn.active{border-color:#5ad08a;color:#5ad08a;background:rgba(90,208,138,.08)}
+
+/* TOAST */
+.toast{position:fixed;left:50%;bottom:90px;z-index:90;transform:translateX(-50%) translateY(18px);background:rgba(14,18,64,.96);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);color:#fff;padding:9px 18px;border-radius:13px;font-size:13px;font-weight:600;letter-spacing:.02em;box-shadow:0 14px 40px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:all .3s;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;max-width:88vw}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast-ico{color:var(--acc);flex-shrink:0}
+.off-badge{position:fixed;top:max(8px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:95;background:rgba(220,80,40,.92);border-radius:8px;padding:4px 10px;font-size:11px;font-weight:700;color:#fff;display:none}
+
+/* Animations */
+@keyframes tw{0%,100%{opacity:.65}50%{opacity:1}}
+@keyframes mgl{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.7;transform:scale(1.1)}}
+@keyframes sht{0%,88%{opacity:0;transform:translate(0,0)}91%{opacity:1}100%{opacity:0;transform:translate(65vw,60vh)}}
+@keyframes sRise{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes sGlow{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+@keyframes mst{0%{transform:translateX(0)}100%{transform:translateX(-50px)}}
+@keyframes psw{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+@keyframes lnt{0%,100%{opacity:.95;transform:scale(1)}25%{opacity:.65;transform:scale(.96)}65%{opacity:1;transform:scale(1.05)}}
+@keyframes cld{0%{transform:translateX(-18vw)}100%{transform:translateX(18vw)}}
+@keyframes wsh{0%,100%{opacity:.3}50%{opacity:.6}}
+.a-tw{animation:tw 3s ease-in-out infinite}
+.a-mg{animation:mgl 7s ease-in-out infinite}
+.a-sh{animation:sht 20s ease-in infinite}
+.a-sr{animation:sRise 9s ease-in-out infinite}
+.a-sg{animation:sGlow 7s ease-in-out infinite}
+.a-ms{animation:mst 20s linear infinite alternate}
+.a-ps{animation:psw 5s ease-in-out infinite;transform-origin:50% 100%}
+.a-ln{animation:lnt 2.5s ease-in-out infinite}
+.a-ln2{animation:lnt 3.2s ease-in-out infinite .5s}
+.a-c1{animation:cld 38s linear infinite alternate}
+.a-c2{animation:cld 50s linear infinite alternate-reverse}
+.a-ws{animation:wsh 3s ease-in-out infinite}
+
+@media (max-width:380px){
+  .modal-card{max-height:90vh}
+  .ar-txt{font-size:calc(20px * var(--fs))}
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE: TABLET & DESKTOP
+   Phone-first build, scaled up for larger viewports.
+   App shell becomes a centered "device frame" on wide
+   screens so layout never stretches edge-to-edge.
+══════════════════════════════════ */
+body{display:flex;justify-content:center;background:#0d1033}
+@media (min-width:701px){
+  body{
+    background:radial-gradient(120% 120% at 50% 0%,#1a1f4e 0%,#08091e 70%,#040510 100%);
+    padding:0;
+  }
+  .app{
+    max-width:480px;
+    width:100%;
+    height:100vh;
+    height:100dvh;
+    box-shadow:0 30px 90px rgba(0,0,0,.55);
+    border-left:1px solid rgba(255,255,255,.06);
+    border-right:1px solid rgba(255,255,255,.06);
+  }
+  /* bottom nav and modal/progress/settings panels must match the app column, not the viewport */
+  .bnav,.modal-backdrop,.prog-screen,.sett,.off-badge,.toast{
+    left:50%;
+    transform:translateX(-50%);
+    max-width:480px;
+    width:100%;
+  }
+  .toast{transform:translateX(-50%) translateY(18px)}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .off-badge{transform:translateX(-50%)}
+  .modal-backdrop{position:fixed;justify-content:center}
+}
+
+/* TABLET — roomier modal, two-column-ish section spacing */
+@media (min-width:701px) and (max-width:1024px){
+  .app{max-width:560px}
+  .bnav,.modal-backdrop,.prog-screen,.sett{max-width:560px}
+  .modal-card{max-width:480px}
+}
+
+/* DESKTOP — wider app frame, larger touch targets stay comfortable for mouse */
+@media (min-width:1025px){
+  .app{max-width:520px;border-radius:28px;margin:24px 0;height:calc(100vh - 48px);height:calc(100dvh - 48px);overflow:hidden}
+  .bnav,.modal-backdrop,.prog-screen,.sett{max-width:520px}
+  .bnav{border-radius:0 0 28px 28px}
+  .scene-hdr{border-radius:28px 28px 0 0;overflow:hidden}
+  .modal-card{max-width:440px}
+  .li:hover{background:rgba(255,255,255,.06)}
+  .section-block-hdr:hover{background:rgba(255,255,255,.04)}
+  .cat-chip:hover,.th-btn:hover,.nav-item:hover{filter:brightness(1.1)}
+  ::-webkit-scrollbar{width:8px}
+  ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:99px}
+}
+
+/* LANDSCAPE PHONES — shrink scene header so content isn't pushed below the fold */
+@media (max-height:480px) and (orientation:landscape){
+  .scene-hdr{height:110px}
+  .topbar{padding-top:max(8px,env(safe-area-inset-top))}
+  .tb-left .greet{font-size:13px}
+  .modal-card{max-height:94vh}
+  .ar-card{padding:14px 16px 10px}
+  .ar-txt{font-size:calc(18px * var(--fs));line-height:1.6}
+}
+
+/* Foldables / very narrow phones */
+@media (max-width:320px){
+  .li-ar{font-size:calc(13px * var(--fs))}
+  .section-block-hdr{padding:12px 12px 8px}
+  .ni{padding:4px 8px;font-size:9px}
+}
+</style>
+</head>
+<body>
+<div class="off-badge" id="offBadge">● Offline</div>
+<div class="app t-isha" id="app">
+
+<!-- SCENE -->
+<div class="scene-hdr">
+<div style="position:absolute;inset:0;width:100%;height:100%">
+<div class="scene-svg active" data-scene="isha"><svg viewBox="0 0 800 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="ng" cx="62%" cy="18%" r="75%"><stop offset="0%" stop-color="#2a2870"/><stop offset="55%" stop-color="#15163a"/><stop offset="100%" stop-color="#050618"/></radialGradient><radialGradient id="nmg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff4c2" stop-opacity=".55"/><stop offset="100%" stop-color="#fff4c2" stop-opacity="0"/></radialGradient><linearGradient id="nmq" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d0e2a"/><stop offset="100%" stop-color="#050610"/></linearGradient></defs><rect width="800" height="230" fill="url(#ng)"/><g fill="#fff"><circle cx="45" cy="18" r="1.4" class="a-tw"/><circle cx="110" cy="11" r="1" class="a-tw" style="animation-delay:-.5s"/><circle cx="170" cy="28" r="1.2" class="a-tw" style="animation-delay:-1s"/><circle cx="240" cy="17" r="1" class="a-tw" style="animation-delay:-1.6s"/><circle cx="350" cy="24" r="1" class="a-tw" style="animation-delay:-.3s"/><circle cx="488" cy="26" r="1" class="a-tw" style="animation-delay:-2.2s"/><circle cx="618" cy="24" r="1" class="a-tw" style="animation-delay:-1.8s"/><circle cx="718" cy="63" r="1.2" class="a-tw" style="animation-delay:-2.7s"/></g><circle cx="598" cy="44" r="52" fill="url(#nmg)" class="a-mg"/><circle cx="598" cy="44" r="29" fill="#fffae0"/><circle cx="613" cy="38" r="24" fill="#15163a"/><g class="a-c1" opacity=".12"><ellipse cx="100" cy="88" rx="80" ry="12" fill="#7a8ab0"/></g><g fill="url(#nmq)"><rect x="0" y="204" width="800" height="26"/><rect x="292" y="140" width="216" height="64"/><ellipse cx="400" cy="158" rx="108" ry="26"/><polygon points="292,140 400,106 508,140"/><rect x="270" y="96" width="13" height="108"/><polygon points="270,96 283,96 283,80 276,67 270,80"/><rect x="517" y="96" width="13" height="108"/><polygon points="517,96 530,96 530,80 524,67 517,80"/></g><circle cx="400" cy="104" r="4.5" fill="#c19a3e"/></svg></div>
+<div class="scene-svg" data-scene="fajr"><svg viewBox="0 0 800 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9c5e7a"/><stop offset="35%" stop-color="#e88c75"/><stop offset="70%" stop-color="#f8b88a"/><stop offset="100%" stop-color="#fde2c5"/></linearGradient><radialGradient id="fsn" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff4c2"/><stop offset="55%" stop-color="#ffc278"/><stop offset="100%" stop-color="#ff8b5a" stop-opacity="0"/></radialGradient><linearGradient id="fmtn" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f4f0e8"/><stop offset="20%" stop-color="#f4f0e8"/><stop offset="22%" stop-color="#7a7a8c"/><stop offset="100%" stop-color="#3a3a55"/></linearGradient></defs><rect width="800" height="230" fill="url(#fg)"/><circle cx="400" cy="140" r="105" fill="url(#fsn)" class="a-sg"/><circle cx="400" cy="140" r="35" fill="#ffe4a8" class="a-sr"/><path d="M262,230 L400,106 L538,230Z" fill="url(#fmtn)"/><path d="M382,118 Q388,109 400,106 Q412,109 418,118 Q410,128 400,125 Q390,128 382,118Z" fill="#fff" opacity=".92"/><g class="a-ms" opacity=".45"><ellipse cx="155" cy="190" rx="85" ry="6" fill="#fde2c5"/><ellipse cx="648" cy="178" rx="100" ry="7" fill="#fde2c5"/></g></svg></div>
+<div class="scene-svg" data-scene="dhuhr"><svg viewBox="0 0 800 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="dsg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5fa8d3"/><stop offset="40%" stop-color="#a3cce8"/><stop offset="70%" stop-color="#e8c87a"/><stop offset="100%" stop-color="#d4a040"/></linearGradient><radialGradient id="dsnr" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fffde7"/><stop offset="35%" stop-color="#ffe082"/><stop offset="100%" stop-color="#ffb300" stop-opacity="0"/></radialGradient><linearGradient id="dd1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f4cc7a"/><stop offset="100%" stop-color="#c8882a"/></linearGradient><linearGradient id="dwt" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7ac0e8"/><stop offset="100%" stop-color="#4a90c0"/></linearGradient></defs><rect width="800" height="230" fill="url(#dsg)"/><circle cx="400" cy="44" r="80" fill="url(#dsnr)"/><circle cx="400" cy="44" r="27" fill="#fff9c4"/><path d="M0,160 Q100,135 200,148 T400,145 T600,151 T800,145 L800,230 L0,230Z" fill="url(#dd1)"/><path d="M460,230 Q452,210 444,194 Q434,178 428,166" stroke="url(#dwt)" stroke-width="16" fill="none" stroke-linecap="round" opacity=".78"/><g fill="#7a5015" opacity=".88"><rect x="552" y="126" width="88" height="50"/><ellipse cx="596" cy="138" rx="44" ry="15"/><polygon points="552,126 596,103 640,126"/></g></svg></div>
+<div class="scene-svg" data-scene="asr"><svg viewBox="0 0 800 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="asg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7ec0e8"/><stop offset="55%" stop-color="#c4e8f0"/><stop offset="100%" stop-color="#e8f4dc"/></linearGradient><linearGradient id="awt" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#88c8e0"/><stop offset="100%" stop-color="#4898c0"/></linearGradient><linearGradient id="ahl1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a8d068"/><stop offset="100%" stop-color="#7ab040"/></linearGradient><linearGradient id="ahl2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8aba48"/><stop offset="100%" stop-color="#5a9028"/></linearGradient><linearGradient id="amng" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a8a28"/><stop offset="100%" stop-color="#2a5a14"/></linearGradient></defs><rect width="800" height="230" fill="url(#asg)"/>
+<!-- Sun glow -->
+<circle cx="660" cy="38" r="46" fill="#fff8d8" opacity=".55"/><circle cx="660" cy="38" r="22" fill="#fff4c0" opacity=".85"/>
+<!-- Drifting clouds, varied shapes -->
+<g class="a-c1" opacity=".9"><ellipse cx="135" cy="40" rx="52" ry="10" fill="#fff"/><ellipse cx="162" cy="33" rx="34" ry="9" fill="#fff"/><ellipse cx="105" cy="36" rx="26" ry="7" fill="#fff"/></g>
+<g class="a-c2" opacity=".8"><ellipse cx="520" cy="58" rx="58" ry="9" fill="#fff"/><ellipse cx="490" cy="52" rx="32" ry="8" fill="#fff"/><ellipse cx="552" cy="51" rx="28" ry="7" fill="#fff"/></g>
+<g class="a-c1" opacity=".65" style="animation-duration:46s"><ellipse cx="300" cy="22" rx="40" ry="6" fill="#fff"/></g>
+<!-- Birds -->
+<g fill="none" stroke="#2a4a10" stroke-width="1.6" stroke-linecap="round" opacity=".55"><path d="M210,68 Q215,62 220,68"/><path d="M226,78 Q230,72 234,78"/><path d="M600,30 Q605,24 610,30"/><path d="M584,42 Q588,36 592,42"/></g>
+<!-- Rolling hills, layered -->
+<path d="M0,128 Q90,104 180,116 Q260,96 340,110 Q420,92 500,108 Q580,96 660,112 Q730,100 800,114 L800,180 L0,180Z" fill="url(#ahl1)" opacity=".55"/>
+<path d="M0,150 Q100,132 200,142 Q300,124 400,138 Q500,122 600,136 Q700,126 800,140 L800,200 L0,200Z" fill="url(#ahl2)" opacity=".7"/>
+<path d="M0,170 Q150,156 300,164 T600,160 T800,166 L800,230 L0,230Z" fill="#3a6e18"/>
+<path d="M0,190 Q120,178 250,184 Q400,190 550,184 Q650,180 800,186 L800,230 L0,230Z" fill="url(#awt)" opacity=".7"/>
+<ellipse cx="220" cy="200" rx="36" ry="2.5" fill="#d8f4ff" opacity=".4" class="a-ws"/><ellipse cx="560" cy="196" rx="30" ry="2" fill="#d8f4ff" opacity=".35" class="a-ws" style="animation-delay:-1.3s"/>
+<!-- Village mosque -->
+<g fill="#2a4a18" opacity=".75"><rect x="340" y="120" width="120" height="56"/><ellipse cx="400" cy="134" rx="60" ry="17"/><polygon points="340,120 400,96 460,120"/><rect x="326" y="94" width="9" height="82"/><polygon points="326,94 335,94 335,82 330,73 326,82"/><rect x="465" y="94" width="9" height="82"/><polygon points="465,94 474,94 474,82 469,73 465,82"/><circle cx="400" cy="96" r="3.5" fill="#c19a3e"/></g>
+<!-- Mango tree (rounded, dense canopy) -->
+<g transform="translate(72,118)">
+  <path d="M0,86 Q1,60 0,38 Q-1,20 1,2" stroke="#4a3010" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <ellipse cx="-14" cy="-2" rx="26" ry="22" fill="url(#amng)"/>
+  <ellipse cx="14" cy="-10" rx="28" ry="24" fill="url(#amng)"/>
+  <ellipse cx="0" cy="-26" rx="24" ry="20" fill="url(#amng)"/>
+  <ellipse cx="-6" cy="-14" rx="18" ry="15" fill="#5a9a30" opacity=".6"/>
+</g>
+<!-- Banana tree (broad flat leaves) -->
+<g transform="translate(150,150)">
+  <path d="M0,68 Q0,46 0,24" stroke="#3a6010" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M0,24 Q-30,8 -42,-14 Q-26,2 0,10Z" fill="#4a8020"/>
+  <path d="M0,24 Q30,6 40,-18 Q26,0 0,10Z" fill="#5a9028"/>
+  <path d="M0,18 Q-8,-6 -2,-30 Q4,-8 0,18Z" fill="#3a7018"/>
+  <path d="M0,14 Q14,-10 12,-32 Q4,-10 0,14Z" fill="#4a8822"/>
+</g>
+<!-- Coconut palm (right side, tall, leaning) -->
+<g transform="translate(700,142)">
+  <path d="M0,72 Q3,46 7,22 Q10,4 14,-12" stroke="#4a3010" stroke-width="6.5" fill="none" stroke-linecap="round"/>
+  <g class="a-ps" style="transform-origin:14px -12px">
+    <path d="M14,-12 Q34,-26 54,-22" stroke="#2d6a10" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M14,-12 Q-4,-24 -22,-18" stroke="#2d6a10" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M14,-12 Q38,-2 52,14" stroke="#3a7a18" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M14,-12 Q-8,-2 -20,16" stroke="#3a7a18" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M14,-12 Q16,-32 12,-44" stroke="#2d6a10" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  </g>
+  <circle cx="10" cy="-10" r="3" fill="#8b5a1a"/><circle cx="16" cy="-6" r="3" fill="#8b5a1a"/>
+</g>
+<!-- Small bush cluster -->
+<g transform="translate(248,196)" opacity=".7"><ellipse cx="-10" cy="0" rx="14" ry="10" fill="#4a8020"/><ellipse cx="8" cy="2" rx="16" ry="11" fill="#3a7018"/><ellipse cx="-2" cy="-6" rx="12" ry="9" fill="#5a9028"/></g>
+<!-- Boat on water -->
+<g transform="translate(175,230)"><path d="M-18,0 Q-17,5 0,5 Q17,5 18,0Z" fill="#4a2a10"/><rect x="-1.5" y="-14" width="3" height="14" fill="#4a2a10"/><path d="M0,-14 L14,-8 L0,-4Z" fill="#e8c870" opacity=".7"/></g>
+</svg></div>
+<div class="scene-svg" data-scene="maghrib"><svg viewBox="0 0 800 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mgg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#150828"/><stop offset="35%" stop-color="#8b2030"/><stop offset="65%" stop-color="#e86020"/><stop offset="100%" stop-color="#f8c868"/></linearGradient><radialGradient id="msn" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fffce0"/><stop offset="35%" stop-color="#ff9a40"/><stop offset="100%" stop-color="#c04010" stop-opacity="0"/></radialGradient></defs><rect width="800" height="230" fill="url(#mgg)"/><circle cx="400" cy="195" r="115" fill="url(#msn)"/><rect x="0" y="195" width="800" height="35" fill="#80201080"/><g fill="#0a0418"><rect x="298" y="108" width="204" height="85"/><ellipse cx="400" cy="128" rx="102" ry="33"/><polygon points="298,108 400,72 502,108"/><rect x="272" y="50" width="13" height="143"/><polygon points="272,50 285,50 285,33 279,22 272,33"/></g></svg></div>
+<div class="scene-svg" data-scene="parchment"><svg viewBox="0 0 800 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pgg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0d898"/><stop offset="50%" stop-color="#e0c070"/><stop offset="100%" stop-color="#c89840"/></linearGradient><radialGradient id="psn" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fffce0"/><stop offset="45%" stop-color="#ffe090"/><stop offset="100%" stop-color="#ffb820" stop-opacity="0"/></radialGradient></defs><rect width="800" height="230" fill="url(#pgg)"/><circle cx="400" cy="70" r="85" fill="url(#psn)"/><circle cx="400" cy="70" r="36" fill="#fff8d0"/><g fill="#6a3a10" opacity=".38"><rect x="330" y="118" width="140" height="56"/><ellipse cx="400" cy="134" rx="70" ry="21"/><polygon points="330,118 400,92 470,118"/></g></svg></div>
+</div>
+<div class="topbar"><div class="tb-left"><div class="greet" id="greeting">As-Salāmu ʿAlaikum</div><div class="dt" id="dateLine"></div></div><div class="tbr"><button class="icon-btn" id="progressBtn" aria-label="Progress"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></button><button class="icon-btn" id="settingsBtn" aria-label="Settings"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button></div></div>
+<div class="scene-foot"><div class="tagline" id="tagline">Faith · Focus · Peace</div></div>
+</div>
+
+<!-- MAIN BODY -->
+<div class="scroll-body" id="scrollBody">
+  <div class="prog-bar-wrap" id="miniProg">
+    <div class="prog-row"><span class="prog-title" id="miniProgTitle">Today's Progress</span><span class="prog-count" id="miniProgCount">0 / 0</span></div>
+    <div class="prog-track"><div class="prog-fill" id="miniProgFill" style="width:0%"></div></div>
+  </div>
+  <div class="search-wrap">
+    <svg class="search-ico" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input class="search-inp" id="searchInp" type="search" autocomplete="off" autocorrect="off" spellcheck="false"/>
+  </div>
+  <!-- All sections rendered as collapsible list blocks, NOT swipeable -->
+  <div id="sectionsWrap"></div>
+</div>
+
+<!-- POPUP MODAL DETAIL -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal-card" id="modalCard">
+    <div class="modal-top">
+      <button class="modal-back" id="modalClose"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <div class="modal-ti"><div class="modal-cat" id="modalCat"></div><div class="modal-name" id="modalName"></div></div>
+      <div class="modal-lang"><button class="modal-lang-b active" data-lang="en" id="dlEn">EN</button><button class="modal-lang-b" data-lang="bn" id="dlBn">বাং</button></div>
+    </div>
+    <div class="modal-scroll">
+      <div class="ar-card"><div class="ar-txt" id="dAr"></div><div class="ar-div"></div></div>
+      <div class="tr-card"><div class="tr-lbl" id="trLbl">Translation</div><div class="tr-txt" id="dTr"></div><div class="ref-l" id="dRef"></div></div>
+      <div class="cnt-card" id="cntCard">
+        <div class="ring-w"><svg class="ring-svg" viewBox="0 0 104 104"><circle class="ring-bg" cx="52" cy="52" r="43"/><circle class="ring-fill" cx="52" cy="52" r="43" id="ringFill"/></svg>
+          <button class="tap-btn" id="tapBtn"><span class="tap-n" id="tapN">0</span><span class="tap-l" id="tapL">tap</span></button></div>
+        <div class="cnt-meta">
+          <div class="tgt-box"><div class="tgt-l" id="tgtL">Target</div><div class="tgt-n" id="tgtN">33</div></div>
+          <button class="rst-btn" id="rstBtn"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg><span id="rstL">Reset</span></button>
+        </div>
+      </div>
+      <div class="dua-tag" id="duaTag" style="display:none"><div class="dua-pill"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg><span id="duaL">Supplication</span></div></div>
+    </div>
+    <div class="modal-nav">
+      <button class="mn-btn" id="prevBtn"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg><span id="prevL">Prev</span></button>
+      <div class="mn-ctr" id="dnCtr"></div>
+      <button class="mn-btn" id="nextBtn"><span id="nextL">Next</span><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS SCREEN -->
+<div class="prog-screen" id="progScreen">
+  <div class="prog-screen-top">
+    <button class="modal-back" id="progBackBtn"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="prog-screen-title" id="progTitle">My Progress</div>
+  </div>
+  <div class="prog-screen-body" id="progBody">
+    <div class="stat-grid" id="statGrid"></div>
+    <div id="catProgList"></div>
+    <button class="reset-all-btn" id="resetAllBtn">🗑 Reset All Progress</button>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bnav">
+  <button class="ni active" id="navHome"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span id="nlHome">Home</span></button>
+  <button class="ni" id="navSearch"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span id="nlSearch">Search</span></button>
+  <button class="ni" id="navProgress"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span id="nlProgress">Progress</span><div class="ni-badge" id="progBadge">!</div></button>
+  <button class="ni" id="navSettings"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span id="nlSettings">Settings</span></button>
+</nav>
+
+<!-- SETTINGS -->
+<div class="sett" id="settPanel">
+  <div class="sett-sh">
+    <div class="sh-hdl"></div>
+    <div class="sh-head"><div class="sh-title" id="stTitle">Settings</div><button class="sh-close" id="stClose"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="sh-sec"><div class="sh-sec-l" id="stLangL">Language</div>
+      <div class="sh-row"><div><div class="sh-rl" id="stLangRow">Translation Language</div><div class="sh-rs" id="stLangSub">Bangla or English</div></div>
+        <div class="s-seg"><button class="s-b active" data-lang="en" id="sLangEn">English</button><button class="s-b" data-lang="bn" id="sLangBn">বাংলা</button></div>
+      </div>
+    </div>
+    <div class="sh-sec"><div class="sh-sec-l" id="stFontL">Font Size</div>
+      <div class="fs-row"><span class="fs-l">A</span><input type="range" class="fs-sl" id="fsSl" min="0.82" max="1.45" step="0.05" value="1"/><span class="fs-l" style="font-size:19px">A</span></div>
+    </div>
+    <div class="sh-sec"><div class="sh-sec-l" id="stThemeL">Theme</div>
+      <button class="auto-btn active" id="autoBtn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span id="autoL">Auto (follows prayer time)</span></button>
+      <div class="th-grid" id="thGrid"></div>
+    </div>
+    <div class="sh-sec" style="padding-bottom:16px">
+      <button class="auto-btn" id="installAppBtn" style="display:none;border-color:var(--acc);color:var(--acc);background:rgba(193,154,62,.1)">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span id="installAppLbl">Install Azkar App</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><svg class="toast-ico" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="toastTxt"></span></div>
+
+<script>
+'use strict';
+
+const CATS = [
+  {id:'morning',en:'Morning',bn:'সকাল',emoji:'🌅'},
+  {id:'evening',en:'Evening',bn:'সন্ধ্যা',emoji:'🌆'},
+  {id:'sleep',en:'Before Sleep',bn:'ঘুমানোর আগে',emoji:'🌙'},
+  {id:'wake',en:'After Waking',bn:'ঘুম থেকে উঠে',emoji:'☀️'},
+  {id:'salah',en:'After Salah',bn:'নামাযের পরে',emoji:'🕌'},
+  {id:'sorrow',en:'Sorrow & Worry',bn:'দুঃখ ও চিন্তায়',emoji:'💙'},
+  {id:'forgive',en:'Forgiveness',bn:'ক্ষমার জন্য',emoji:'🤲'},
+  {id:'quran',en:'Quran & Dhikr',bn:'কুরআন ও যিকর',emoji:'📖'},
+  {id:'travel',en:'Travel',bn:'সফরে',emoji:'✈️'},
+  {id:'food',en:'Food & Home',bn:'খাবার ও ঘরে',emoji:'🏠'},
+  {id:'protect',en:'Protection',bn:'সুরক্ষার জন্য',emoji:'🛡️'},
+];
+
+const D = [
+{id:'m1',cat:'morning',arabic:'أَصْبَحْنَا وَأَصْبَحَ ٱلْمُلْكُ لِلَّٰهِ وَٱلْحَمْدُ لِلَّٰهِ',en:'We have entered the morning and the whole kingdom of Allah has also entered the morning. All praise is due to Allah.',bn:'আমরা সকালে প্রবেশ করেছি এবং আল্লাহর রাজত্বও সকালে প্রবেশ করেছে। সকল প্রশংসা আল্লাহর।',target:1,ref:'Hisnul Muslim — Morning Dhikr'},
+{id:'m2',cat:'morning',arabic:'اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ',en:'O Allah, by You we enter the morning and by You we enter the evening. By You we live and by You we die, and to You is the resurrection.',bn:'হে আল্লাহ, আপনার কাছেই আমরা সকালে প্রবেশ করি, আপনার কাছেই সন্ধ্যা পাই। আপনার মাধ্যমেই বাঁচি ও মরি, আপনার কাছেই পুনরুত্থান।',target:1,ref:'Sunan Abu Dawud 5068'},
+{id:'m3',cat:'morning',arabic:'اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ',en:'O Allah, You are my Lord. There is no god except You. You created me and I am Your servant.',bn:'হে আল্লাহ, আপনি আমার রব। আপনি ছাড়া কোনো মাবুদ নেই। আপনি আমাকে সৃষ্টি করেছেন এবং আমি আপনার বান্দা।',target:1,ref:'Sahih al-Bukhari 6306 — Sayyid al-Istighfar'},
+{id:'m4',cat:'morning',arabic:'أَصْبَحْتُ أُشْهِدُ اللَّهَ وَحَمَلَةَ عَرْشِهِ وَمَلَائِكَتَهُ وَجَمِيعَ خَلْقِهِ أَنَّهُ لَا إِلَهَ إِلَّا هُوَ',en:'I begin the morning calling Allah, the bearers of His Throne, His angels, and all of His creation to witness that there is no god except Him.',bn:'আমি সকালে সাক্ষ্য দিচ্ছি — আল্লাহ, আরশ বহনকারী ফেরেশতা, তাঁর ফেরেশতাগণ ও সকল সৃষ্টিকে — যে তিনি ছাড়া কোনো মাবুদ নেই।',target:4,ref:'Sunan Abu Dawud 5069'},
+{id:'m5',cat:'morning',arabic:'اللَّهُمَّ عَافِنِي فِي بَدَنِي اللَّهُمَّ عَافِنِي فِي سَمْعِي اللَّهُمَّ عَافِنِي فِي بَصَرِي',en:'O Allah, grant me health in my body. O Allah, grant me health in my hearing. O Allah, grant me health in my sight.',bn:'হে আল্লাহ, আমার শরীরে সুস্থতা দিন। হে আল্লাহ, আমার শ্রবণে সুস্থতা দিন। হে আল্লাহ, আমার দৃষ্টিতে সুস্থতা দিন।',target:3,ref:'Sunan Abu Dawud 5090'},
+{id:'m6',cat:'morning',arabic:'بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ',en:'In the name of Allah — with whose name nothing on earth or in heaven causes harm. He is the All-Hearing, the All-Knowing.',bn:'আল্লাহর নামে — যাঁর নামের সাথে আসমান ও যমীনে কোনো কিছু ক্ষতি করতে পারে না। তিনি সর্বশ্রোতা, সর্বজ্ঞ।',target:3,ref:'Sunan Abu Dawud 5088'},
+
+{id:'e1',cat:'evening',arabic:'أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ',en:'We have entered the evening and the whole kingdom of Allah has also entered the evening. All praise is due to Allah.',bn:'আমরা সন্ধ্যায় প্রবেশ করেছি এবং আল্লাহর রাজত্বও সন্ধ্যায় প্রবেশ করেছে। সকল প্রশংসা আল্লাহর।',target:1,ref:'Hisnul Muslim — Evening Dhikr'},
+{id:'e2',cat:'evening',arabic:'اللَّهُمَّ بِكَ أَمْسَيْنَا وَبِكَ أَصْبَحْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ الْمَصِيرُ',en:'O Allah, by You we enter the evening and by You we enter the morning. By You we live and by You we die, and to You is the return.',bn:'হে আল্লাহ, আপনার কাছেই আমরা সন্ধ্যায় প্রবেশ করি, আপনার কাছেই সকাল পাই। আপনার মাধ্যমেই বাঁচি ও মরি, আপনার কাছেই প্রত্যাবর্তন।',target:1,ref:'Sunan Abu Dawud 5068'},
+{id:'e3',cat:'evening',arabic:'اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ وَأُشْهِدُ حَمَلَةَ عَرْشِكَ وَمَلَائِكَتَكَ وَجَمِيعَ خَلْقِكَ أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ',en:'O Allah, I have entered the evening calling You, the bearers of Your Throne, Your angels, and all of Your creation to witness that You are Allah — there is no god except You.',bn:'হে আল্লাহ, আমি সন্ধ্যায় সাক্ষ্য দিচ্ছি — আপনাকে, আরশ বহনকারীদের, ফেরেশতাদের ও সৃষ্টিকুলকে — যে আপনিই আল্লাহ, আপনি ছাড়া কোনো মাবুদ নেই।',target:4,ref:'Sunan Abu Dawud 5069'},
+{id:'e4',cat:'evening',arabic:'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ',en:'I seek refuge in the perfect words of Allah from the evil of what He has created.',bn:'আমি আল্লাহর পূর্ণাঙ্গ বাণীর মাধ্যমে তাঁর সৃষ্টির অনিষ্ট থেকে আশ্রয় চাই।',target:3,ref:'Sahih Muslim 2708'},
+{id:'e5',cat:'evening',arabic:'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ',en:'O Allah, I ask You for pardon and well-being in this world and in the Hereafter.',bn:'হে আল্লাহ, আমি আপনার কাছে দুনিয়া ও আখিরাতে মাফ ও নিরাপত্তা চাই।',target:1,ref:'Sunan Ibn Majah 3871'},
+
+{id:'sl1',cat:'sleep',arabic:'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا',en:'In Your name, O Allah, I die and I live.',bn:'আপনার নামে হে আল্লাহ, আমি মৃত্যুবরণ করি ও জীবন লাভ করি।',target:1,ref:'Sahih al-Bukhari 6324'},
+{id:'sl2',cat:'sleep',arabic:'اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ',en:'O Allah, protect me from Your punishment on the Day You resurrect Your servants.',bn:'হে আল্লাহ, যেদিন আপনি আপনার বান্দাদের পুনরুত্থান করবেন সেদিন আমাকে আপনার আযাব থেকে রক্ষা করুন।',target:3,ref:'Sunan Abu Dawud 5045'},
+{id:'sl3',cat:'sleep',arabic:'سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ',en:'Glory be to You, O Allah, and I praise You. I bear witness that there is no god except You. I seek Your forgiveness and repent to You.',bn:'আপনি পবিত্র হে আল্লাহ, আপনার প্রশংসা করি। সাক্ষ্য দিচ্ছি আপনি ছাড়া কোনো মাবুদ নেই। আপনার কাছে ক্ষমা চাই ও তওবা করি।',target:1,ref:'Sahih al-Bukhari 6406'},
+{id:'sl4',cat:'sleep',arabic:'اللَّهُمَّ أَسْلَمْتُ نَفْسِي إِلَيْكَ وَوَجَّهْتُ وَجْهِي إِلَيْكَ وَفَوَّضْتُ أَمْرِي إِلَيْكَ',en:'O Allah, I submit my soul to You, turn my face to You, entrust my affairs to You.',bn:'হে আল্লাহ, আমি আমার আত্মা আপনার কাছে সমর্পণ করলাম, মুখ আপনার দিকে ফেরালাম, আমার বিষয় আপনার উপর ন্যস্ত করলাম।',target:1,ref:'Sahih al-Bukhari 247'},
+{id:'sl5',cat:'sleep',arabic:'قُلْ هُوَ اللَّهُ أَحَدٌ، قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ، قُلْ أَعُوذُ بِرَبِّ النَّاسِ',en:'Recite Surah Al-Ikhlas, Al-Falaq and An-Nas (3 times each before sleep — blow on hands and wipe over body).',bn:'সূরা আল-ইখলাস, আল-ফালাক ও আন-নাস পড়ুন (ঘুমানোর আগে ৩ বার — হাতে ফুঁ দিয়ে শরীরে মাসেহ করুন)।',target:3,ref:'Sahih al-Bukhari 5017'},
+{id:'sl6',cat:'sleep',arabic:'اللَّهُمَّ رَبَّ السَّمَاوَاتِ وَرَبَّ الْأَرْضِ وَرَبَّ الْعَرْشِ الْعَظِيمِ رَبَّنَا وَرَبَّ كُلِّ شَيْءٍ',en:'O Allah, Lord of the heavens and Lord of the earth, Lord of the Mighty Throne, our Lord and the Lord of all things.',bn:'হে আল্লাহ, আসমান ও যমীনের রব, মহান আরশের রব, আমাদের রব ও সকল কিছুর রব।',target:1,ref:'Sahih al-Bukhari 6320'},
+
+{id:'w1',cat:'wake',arabic:'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',en:'All praise is due to Allah who gave us life after He had caused us to die. And to Him is the resurrection.',bn:'সকল প্রশংসা আল্লাহর, যিনি আমাদের মৃত্যু দেওয়ার পর আবার জীবন দিলেন। তাঁর কাছেই পুনরুত্থান।',target:1,ref:'Sahih al-Bukhari 6312'},
+{id:'w2',cat:'wake',arabic:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',en:'There is no god but Allah alone, with no partner. To Him is the dominion and all praise, and He is over all things capable.',bn:'আল্লাহ ছাড়া কোনো মাবুদ নেই, তাঁর কোনো শরিক নেই। রাজত্ব তাঁর, প্রশংসা তাঁর, তিনি সব কিছুর উপর শক্তিমান।',target:1,ref:'Sahih al-Bukhari 1154'},
+{id:'w3',cat:'wake',arabic:'أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ رَبِّ الْعَالَمِينَ اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ هَذَا الْيَوْمِ',en:'We have entered the morning, and the dominion belongs to Allah, Lord of all worlds. O Allah, I ask You for the good of this day.',bn:'আমরা সকালে প্রবেশ করেছি এবং রাজত্ব সকল জগতের রব আল্লাহর। হে আল্লাহ, আমি আপনার কাছে এই দিনের কল্যাণ চাই।',target:1,ref:'Sunan Abu Dawud 5071'},
+
+{id:'s1',cat:'salah',arabic:'أَسْتَغْفِرُ اللَّهَ',en:'I seek forgiveness from Allah.',bn:'আমি আল্লাহর কাছে ক্ষমা প্রার্থনা করছি।',target:3,ref:'Sahih Muslim 591'},
+{id:'s2',cat:'salah',arabic:'اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ',en:'O Allah, You are Peace and from You comes peace. Blessed are You, O Possessor of Majesty and Honour.',bn:'হে আল্লাহ, আপনিই শান্তি, শান্তি আপনার থেকে। বরকতময় আপনি, হে মহিমা ও সম্মানের মালিক।',target:1,ref:'Sahih Muslim 591'},
+{id:'s3',cat:'salah',arabic:'سُبْحَانَ اللَّهِ',en:'Glory be to Allah.',bn:'আল্লাহ পবিত্র।',target:33,ref:'Sahih Muslim 597'},
+{id:'s4',cat:'salah',arabic:'الْحَمْدُ لِلَّهِ',en:'All praise is due to Allah.',bn:'সকল প্রশংসা আল্লাহর।',target:33,ref:'Sahih Muslim 597'},
+{id:'s5',cat:'salah',arabic:'اللَّهُ أَكْبَرُ',en:'Allah is the Greatest.',bn:'আল্লাহ সর্বশ্রেষ্ঠ।',target:34,ref:'Sahih Muslim 597'},
+{id:'s6',cat:'salah',arabic:'اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ',en:'Allah — there is no deity except Him, the Ever-Living, the Sustainer. Neither drowsiness nor sleep overtakes Him. (Āyat al-Kursī — recite after every obligatory prayer)',bn:'আল্লাহ — তিনি ছাড়া কোনো উপাস্য নেই, চিরঞ্জীব, চিরস্থায়ী। তন্দ্রা বা নিদ্রা তাঁকে স্পর্শ করে না। (আয়াতুল কুরসি — প্রতিটি ফরজ নামাযের পরে পড়ুন)',target:1,ref:'Surah Al-Baqarah 2:255 — Nasai 9928'},
+{id:'s7',cat:'salah',arabic:'اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ',en:'O Allah, help me to remember You, to be grateful to You, and to worship You in the best manner.',bn:'হে আল্লাহ, আমাকে আপনার যিকর, শুকর ও সুন্দরভাবে ইবাদতের তওফিক দিন।',target:1,ref:'Sunan Abu Dawud 1522'},
+
+{id:'sr1',cat:'sorrow',arabic:'لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ',en:'There is no deity except You; glory be to You. Indeed, I have been of the wrongdoers. (Dua of Yunus ﷺ — in the belly of the whale)',bn:'আপনি ছাড়া কোনো উপাস্য নেই; আপনি পবিত্র। নিশ্চয়ই আমি ছিলাম অত্যাচারীদের মধ্যে। (ইউনুস আ.-এর দু\'আ — মাছের পেটে)',target:1,ref:'Surah Al-Anbiyāʾ 21:87'},
+{id:'sr2',cat:'sorrow',arabic:'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ',en:'Allah is sufficient for me. There is no god but Him. Upon Him I rely, and He is the Lord of the Mighty Throne.',bn:'আল্লাহই আমার জন্য যথেষ্ট। তিনি ছাড়া কোনো মাবুদ নেই। তাঁর উপরই আমি ভরসা করি। তিনি মহান আরশের রব।',target:7,ref:'Sunan Abu Dawud 5081'},
+{id:'sr3',cat:'sorrow',arabic:'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ وَالْعَجْزِ وَالْكَسَلِ وَالْجُبْنِ وَالْبُخْلِ وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ',en:'O Allah, I seek refuge in You from anxiety, sorrow, incapacity, laziness, cowardice, miserliness, overwhelming debt, and oppression by men.',bn:'হে আল্লাহ, আমি দুশ্চিন্তা, দুঃখ, অক্ষমতা, অলসতা, কাপুরুষতা, কার্পণ্য, ঋণের ভার ও মানুষের আধিপত্য থেকে আপনার আশ্রয় চাই।',target:1,ref:'Sahih al-Bukhari 6369'},
+{id:'sr4',cat:'sorrow',arabic:'اللَّهُ اللَّهُ رَبِّي لَا أُشْرِكُ بِهِ شَيْئًا',en:'Allah, Allah is my Lord. I do not associate anything with Him.',bn:'আল্লাহ, আল্লাহ আমার রব। আমি তাঁর সাথে কাউকে শরিক করি না।',target:7,ref:'Sunan Abu Dawud 1525'},
+{id:'sr5',cat:'sorrow',arabic:'يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ',en:'O Ever-Living, O Sustainer — I seek help through Your mercy.',bn:'হে চিরঞ্জীব, হে চিরস্থায়ী — আমি তোমার রহমতের মাধ্যমে সাহায্য চাই।',target:100,ref:'Jami at-Tirmidhi 3524'},
+{id:'sr6',cat:'sorrow',arabic:'إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ اللَّهُمَّ أْجُرْنِي فِي مُصِيبَتِي وَأَخْلِفْ لِي خَيْرًا مِنْهَا',en:'Indeed, to Allah we belong and to Him we return. O Allah, reward me in this calamity and replace it with something better.',bn:'নিশ্চয়ই আমরা আল্লাহর জন্য এবং আমরা তাঁর কাছেই ফিরব। হে আল্লাহ, এই মুসিবতে আমাকে সওয়াব দিন এবং এর চেয়ে উত্তম কিছু দিয়ে প্রতিস্থাপন করুন।',target:1,ref:'Sahih Muslim 918'},
+
+{id:'f1',cat:'forgive',arabic:'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ',en:'I seek forgiveness from Allah and repent to Him.',bn:'আমি আল্লাহর কাছে ক্ষমা চাই এবং তাঁর কাছে তওবা করি।',target:100,ref:'Sahih al-Bukhari 6307'},
+{id:'f2',cat:'forgive',arabic:'اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي',en:'O Allah, You are the Pardoner and You love to pardon, so pardon me.',bn:'হে আল্লাহ, আপনি ক্ষমাশীল, ক্ষমা করতে ভালোবাসেন। তাই আমাকে ক্ষমা করুন।',target:3,ref:'Jami at-Tirmidhi 3513 — Laylatul Qadr dua'},
+{id:'f3',cat:'forgive',arabic:'رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ',en:'My Lord, forgive me and accept my repentance. Indeed, You are the Accepter of repentance, the Merciful.',bn:'হে আমার রব, আমাকে ক্ষমা করুন ও তওবা কবুল করুন — আপনিই ক্ষমাশীল, দয়ালু।',target:100,ref:'Abu Dawud 1516'},
+{id:'f4',cat:'forgive',arabic:'اللَّهُمَّ اغْفِرْ لِي ذَنْبِي كُلَّهُ دِقَّهُ وَجِلَّهُ وَأَوَّلَهُ وَآخِرَهُ وَعَلَانِيَتَهُ وَسِرَّهُ',en:'O Allah, forgive me all my sins — the small and the great, the first and the last, the open and the secret.',bn:'হে আল্লাহ, আমার সকল গুনাহ মাফ করুন — ছোট ও বড়, প্রথম ও শেষ, প্রকাশ্য ও গোপন।',target:1,ref:'Sahih Muslim 483'},
+{id:'f5',cat:'forgive',arabic:'سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ لَا إِلَهَ إِلَّا أَنْتَ أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ',en:'Glory be to You, O Allah, and by Your praise. There is no god except You. I seek Your forgiveness and I repent to You.',bn:'হে আল্লাহ, আপনি পবিত্র ও প্রশংসিত। আপনি ছাড়া কোনো মাবুদ নেই। আপনার কাছে ক্ষমা চাই ও তওবা করি।',target:1,ref:'Sahih al-Bukhari 834'},
+
+{id:'q1',cat:'quran',arabic:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ',en:'Glory and praise be to Allah; glory be to Allah the Magnificent. (Two phrases beloved to Allah, light on tongue, heavy in scales)',bn:'আল্লাহ পবিত্র ও তাঁর প্রশংসা; মহান আল্লাহ পবিত্র। (আল্লাহর কাছে প্রিয় দুটি বাক্য — জিহ্বায় হালকা, মিজানে ভারী)',target:100,ref:'Sahih al-Bukhari 6406'},
+{id:'q2',cat:'quran',arabic:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',en:'There is no god but Allah alone, with no partner. To Him is the dominion and all praise, and He is over all things capable. (100x equals freeing 10 slaves, 100 good deeds recorded)',bn:'আল্লাহ ছাড়া মাবুদ নেই, শরিক নেই। রাজত্ব ও প্রশংসা তাঁর। সব কিছুর উপর শক্তিমান। (১০০ বার = ১০ দাস মুক্তির সমান)',target:100,ref:'Sahih al-Bukhari 3293'},
+{id:'q3',cat:'quran',arabic:'اللَّهُمَّ اجْعَلِ الْقُرْآنَ رَبِيعَ قَلْبِي وَنُورَ صَدْرِي وَجَلَاءَ حُزْنِي وَذَهَابَ هَمِّي',en:'O Allah, make the Quran the spring of my heart, the light of my chest, the reliever of my sorrow, and the remover of my anxiety.',bn:'হে আল্লাহ, কোরআনকে আমার অন্তরের বসন্ত, বুকের আলো, দুঃখের নিরাময় ও চিন্তার অবসান করুন।',target:1,ref:'Musnad Ahmad 3712'},
+{id:'q4',cat:'quran',arabic:'سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ',en:'Glory be to Allah, praise be to Allah, there is no god except Allah, and Allah is the Greatest. (Most beloved words to Allah)',bn:'আল্লাহ পবিত্র, প্রশংসা আল্লাহর, আল্লাহ ছাড়া মাবুদ নেই, আল্লাহ সর্বশ্রেষ্ঠ। (আল্লাহর কাছে সবচেয়ে প্রিয় কথা)',target:100,ref:'Sahih Muslim 2137'},
+{id:'q5',cat:'quran',arabic:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',en:'There is no might nor power except with Allah. (A treasure from the treasures of Paradise)',bn:'আল্লাহ ছাড়া কোনো শক্তি বা সামর্থ্য নেই। (জান্নাতের একটি খাজানা)',target:100,ref:'Sahih al-Bukhari 6384'},
+{id:'q6',cat:'quran',arabic:'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ',en:'O Allah, bless Muhammad ﷺ and his family as You blessed Ibrahim and his family.',bn:'হে আল্লাহ, মুহাম্মদ ﷺ ও তাঁর পরিবারের উপর রহমত দিন, যেমন ইব্রাহীম ও তাঁর পরিবারের উপর দিয়েছিলেন।',target:10,ref:'Sahih al-Bukhari 3370'},
+
+{id:'t1',cat:'travel',arabic:'سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ',en:'Glory be to Him who has subjected this to us, for we were not capable of doing so. And indeed, to our Lord we are returning.',bn:'পবিত্র তিনি যিনি এটিকে আমাদের অধীন করে দিয়েছেন, আমরা এটি নিজেরা করতে পারতাম না। আমরা তো আমাদের রবের কাছে ফিরব।',target:1,ref:'Surah Az-Zukhruf 43:13-14 — Dua for transport'},
+{id:'t2',cat:'travel',arabic:'اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى وَمِنَ الْعَمَلِ مَا تَرْضَى',en:'O Allah, we ask You on this journey for goodness, piety, and deeds that please You.',bn:'হে আল্লাহ, এই সফরে আমরা আপনার কাছে নেকী, তাকওয়া এবং এমন আমল চাই যা আপনি পছন্দ করেন।',target:1,ref:'Sahih Muslim 1342'},
+{id:'t3',cat:'travel',arabic:'اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ وَالْخَلِيفَةُ فِي الْأَهْلِ',en:'O Allah, You are the Companion on the journey and the Guardian of the family (at home).',bn:'হে আল্লাহ, আপনিই সফরের সাথী এবং পরিবারের অভিভাবক।',target:1,ref:'Sahih Muslim 1342'},
+
+{id:'h1',cat:'food',arabic:'بِسْمِ اللَّهِ',en:'In the name of Allah. (Before eating)',bn:'আল্লাহর নামে। (খাওয়ার আগে)',target:1,ref:'Sunan Abu Dawud 3767'},
+{id:'h2',cat:'food',arabic:'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ',en:'All praise be to Allah who has fed me this and provided it for me without any might or power from myself.',bn:'সকল প্রশংসা আল্লাহর যিনি আমাকে এটি খাইয়েছেন এবং আমার কোনো শক্তি বা ক্ষমতা ছাড়াই রিযিক দিয়েছেন।',target:1,ref:'Jami at-Tirmidhi 3458'},
+{id:'h3',cat:'food',arabic:'اللَّهُمَّ بَارِكْ لَنَا فِيهِ وَأَطْعِمْنَا خَيْرًا مِنْهُ',en:'O Allah, bless it for us and provide us with something better than it.',bn:'হে আল্লাহ, এতে আমাদের জন্য বরকত দিন এবং এর চেয়ে ভালো কিছু খাওয়ান।',target:1,ref:'Jami at-Tirmidhi 3455'},
+{id:'h4',cat:'food',arabic:'اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا وَخَيْرَ مَا فِيهَا وَأَعُوذُ بِكَ مِنْ شَرِّهَا وَشَرِّ مَا فِيهَا',en:'O Allah, I ask You for the good of it and the good within it, and I seek refuge in You from the evil of it and the evil within it. (Entering a city)',bn:'হে আল্লাহ, এর এবং এর মধ্যে যা আছে তার কল্যাণ চাই, এর এবং এর মধ্যে যা আছে তার অনিষ্ট থেকে আশ্রয় চাই। (শহরে প্রবেশের সময়)',target:1,ref:'Sahih Muslim 1342'},
+{id:'h5',cat:'food',arabic:'بِسْمِ اللَّهِ وَلَجْنَا وَبِسْمِ اللَّهِ خَرَجْنَا وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا',en:'In the name of Allah we enter, and in the name of Allah we leave, and upon Allah our Lord we place our trust.',bn:'আল্লাহর নামে প্রবেশ করলাম, আল্লাহর নামে বের হব এবং আমাদের রব আল্লাহর উপর ভরসা করলাম।',target:1,ref:'Sunan Abu Dawud 5096'},
+
+{id:'p1',cat:'protect',arabic:'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ',en:'O Allah, I seek refuge in You from the evil of myself and from the evil of Shaytan and his snares.',bn:'হে আল্লাহ, আমি আমার নফসের অনিষ্ট এবং শয়তান ও তার ফাঁদ থেকে আপনার আশ্রয় চাই।',target:3,ref:'Sunan Abu Dawud 5067'},
+{id:'p2',cat:'protect',arabic:'بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ',en:'In the name of Allah — with whose name nothing on earth or in heaven causes harm. He is the All-Hearing, All-Knowing.',bn:'আল্লাহর নামে — যাঁর নামের সাথে আসমান ও যমীনে কোনো কিছু ক্ষতি করতে পারে না। তিনি সর্বশ্রোতা, সর্বজ্ঞ।',target:3,ref:'Sunan Abu Dawud 5088'},
+{id:'p3',cat:'protect',arabic:'أَعُوذُ بِاللَّهِ السَّمِيعِ الْعَلِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ',en:'I seek refuge with Allah, the All-Hearing, the All-Knowing, from the accursed Shaytan.',bn:'আমি বিতাড়িত শয়তান থেকে সর্বশ্রোতা সর্বজ্ঞ আল্লাহর আশ্রয় চাই।',target:3,ref:'Jami at-Tirmidhi 3392'},
+{id:'p4',cat:'protect',arabic:'اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ وَمِنْ خَلْفِي وَعَنْ يَمِينِي وَعَنْ شِمَالِي وَمِنْ فَوْقِي',en:'O Allah, guard me from in front of me and behind me, to my right and to my left, and from above me.',bn:'হে আল্লাহ, আমাকে আমার সামনে ও পেছনে, ডানে ও বামে এবং উপর থেকে রক্ষা করুন।',target:1,ref:'Sunan Abu Dawud 5074'},
+{id:'p5',cat:'protect',arabic:'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ مِنْ شَرِّ مَا خَلَقَ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ',en:'Say: I seek refuge in the Lord of daybreak, from the evil of what He has created, and from the evil of the darkening night as it settles.',bn:'বলুন: আমি ভোরের রবের আশ্রয় চাই, তাঁর সৃষ্টির অনিষ্ট থেকে, এবং অন্ধকার রাতের অনিষ্ট থেকে যখন তা ঢেকে যায়।',target:3,ref:'Surah Al-Falaq 113:1-3'},
+];
+
+const TH=[
+  {id:'fajr',name:'Fajr',e:'🌅',c:'#ffd27a',cls:'t-fajr',sc:'fajr',s:4,en:10},
+  {id:'dhuhr',name:'Dhuhr',e:'☀️',c:'#ffe082',cls:'t-dhuhr',sc:'dhuhr',s:10,en:15},
+  {id:'asr',name:'Asr',e:'🌿',c:'#bce394',cls:'t-asr',sc:'asr',s:15,en:17.5},
+  {id:'maghrib',name:'Maghrib',e:'🌇',c:'#ff9a5a',cls:'t-maghrib',sc:'maghrib',s:17.5,en:20},
+  {id:'isha',name:'Isha',e:'🌙',c:'#a8b8e0',cls:'t-isha',sc:'isha',s:20,en:28},
+  {id:'parchment',name:'Parchment',e:'📜',c:'#c8a850',cls:'t-parch',sc:'parchment',s:-1,en:-1},
+];
+
+const L={
+en:{g:'As-Salāmu ʿAlaikum',tg:'Faith · Focus · Peace',tr:'Translation',
+  tp:'tap',tgt:'Target',rst:'Reset',du:'Supplication',
+  st:'Settings',sl:'Language',slr:'Translation Language',sls:'Bangla or English',
+  sf:'Font Size',sth:'Theme',sa:'Auto (follows prayer time)',
+  nx:'Next',pv:'Prev',ho:'Home',srch:'Search',prog:'Progress',
+  wl:'Tap any dua to begin ﷺ',dn:'Section complete — MashaAllah ﷺ',rch:'Target reached ﷺ',
+  progTitle:'My Progress',totalDone:'Completed',totalItems:'Total',pctDone:'Done',
+  resetAll:'Reset All Progress',confirmReset:'Reset ALL progress? This cannot be undone.',
+  searchPh:'Search duas and azkar…',noResult:'No results found',
+  todayProg:"Today's Progress",installApp:'Install Azkar App',
+},
+bn:{g:'আস-সালামু আলাইকুম',tg:'বিশ্বাস · মনোযোগ · শান্তি',tr:'অনুবাদ',
+  tp:'চাপুন',tgt:'লক্ষ্য',rst:'রিসেট',du:'দু\'আ (প্রার্থনা)',
+  st:'সেটিংস',sl:'ভাষা',slr:'অনুবাদের ভাষা',sls:'বাংলা অথবা ইংরেজি',
+  sf:'ফন্ট সাইজ',sth:'থিম',sa:'স্বয়ংক্রিয় (নামাযের সময়)',
+  nx:'পরে',pv:'আগে',ho:'হোম',srch:'খুঁজুন',prog:'অগ্রগতি',
+  wl:'শুরু করতে যেকোনো দু\'আ চাপুন ﷺ',dn:'সেকশন সম্পন্ন — মাশাআল্লাহ ﷺ',rch:'লক্ষ্য পূর্ণ ﷺ',
+  progTitle:'আমার অগ্রগতি',totalDone:'সম্পন্ন',totalItems:'মোট',pctDone:'সম্পূর্ণ',
+  resetAll:'সব অগ্রগতি রিসেট করুন',confirmReset:'সমস্ত অগ্রগতি রিসেট করবেন? এটি পূর্বাবস্থায় ফেরানো যাবে না।',
+  searchPh:'দু\'আ ও আযকার খুঁজুন…',noResult:'কোনো ফলাফল পাওয়া যায়নি',
+  todayProg:'আজকের অগ্রগতি',installApp:'অ্যাপ ইন্সটল করুন',
+},
+};
+const tr=k=>(L[S.lang]||L.en)[k]||L.en[k];
+
+const S={lang:'en',idx:null,mt:null,counts:{},fs:1,searchQ:'',collapsed:{}};
+try{const c=JSON.parse(localStorage.getItem('az-c')||'{}');if(c&&typeof c==='object')S.counts=c;}catch(e){}
+try{const p=JSON.parse(localStorage.getItem('az-p')||'{}');if(p){if(p.lang)S.lang=p.lang;if(p.fs)S.fs=+p.fs;if(p.mt!==undefined)S.mt=p.mt;}}catch(e){}
+
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+function sp(){try{localStorage.setItem('az-p',JSON.stringify({lang:S.lang,fs:S.fs,mt:S.mt}));}catch(e){}}
+function sc(){try{localStorage.setItem('az-c',JSON.stringify(S.counts));}catch(e){}}
+function isDone(id){const item=D.find(x=>x.id===id);if(!item)return false;return(S.counts[id]||0)>=(item.target||1);}
+function isPartial(id){const c=S.counts[id]||0;const item=D.find(x=>x.id===id);if(!item)return false;return c>0&&c<item.target;}
+
+function autoThId(){
+  const h=new Date().getHours()+new Date().getMinutes()/60;
+  for(const t of TH){if(t.s<0)continue;const e=t.en>24?t.en-24:t.en;if(t.s<e){if(h>=t.s&&h<e)return t.id;}else{if(h>=t.s||h<e)return t.id;}}
+  return 'isha';
+}
+function activeTh(){return TH.find(t=>t.id===(S.mt||autoThId()))||TH[4];}
+function applyTheme(){
+  const tm=activeTh();
+  const app=$('#app');
+  app.className=app.className.replace(/\bt-\w+/g,'').trim()+' '+tm.cls;
+  $$('.scene-svg').forEach(s=>s.classList.toggle('active',s.dataset.scene===tm.sc));
+  const ps=$('#progScreen');
+  if(ps)ps.className=ps.className.replace(/\bt-\w+/g,'').trim()+' '+tm.cls;
+  const mc=$('#modalCard');
+  if(mc)mc.className='modal-card '+tm.cls;
+  document.documentElement.style.setProperty('--fs',S.fs);
+  $$('.auto-btn').forEach(b=>b.classList.toggle('active',!S.mt));
+  $$('.th-btn[data-tid]').forEach(b=>b.classList.toggle('active',b.dataset.tid===S.mt));
+}
+
+let _tt;
+function toast(txt){const t=$('#toast'),s=$('#toastTxt');if(s)s.textContent=txt;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2600);}
+function updateDate(){const el=$('#dateLine');if(el)el.textContent=new Date().toLocaleDateString('en-US',{weekday:'short',year:'numeric',month:'short',day:'numeric'});}
+
+function totalStats(){const done=D.filter(x=>isDone(x.id)).length;return{done,total:D.length};}
+function catStats(catId){const items=D.filter(x=>x.cat===catId);const done=items.filter(x=>isDone(x.id)).length;return{done,total:items.length};}
+
+function updateMiniProgress(){
+  const{done,total}=totalStats();
+  const pct=total?Math.round(done/total*100):0;
+  const el=$('#miniProgCount');if(el)el.textContent=`${done} / ${total}`;
+  const fill=$('#miniProgFill');if(fill)fill.style.width=pct+'%';
+  const title=$('#miniProgTitle');if(title)title.textContent=tr('todayProg');
+  const badge=$('#progBadge');
+  if(badge)badge.classList.toggle('show',done===total&&total>0);
+}
+
+function updateRing(){
+  const rf=$('#ringFill');if(!rf||!S.idx)return;
+  const item=D.find(x=>x.id===S.idx);if(!item)return;
+  const pct=Math.min((S.counts[S.idx]||0)/(item.target||1),1);
+  rf.style.strokeDashoffset=2*Math.PI*43*(1-pct);
+  rf.classList.toggle('done',pct>=1);
+}
+
+function matchesSearch(item){
+  if(!S.searchQ)return true;
+  const q=S.searchQ.toLowerCase();
+  return item.arabic.includes(S.searchQ)||item.en.toLowerCase().includes(q)||item.bn.includes(S.searchQ)||(item.ref||'').toLowerCase().includes(q);
+}
+
+// ── RENDER SECTIONS (list mode — collapsible blocks, no swipe) ──
+function renderSections(){
+  const wrap=$('#sectionsWrap');if(!wrap)return;
+  wrap.innerHTML='';
+  let anyMatch=false;
+  CATS.forEach(cat=>{
+    const items=D.filter(x=>x.cat===cat.id&&matchesSearch(x));
+    if(items.length===0)return;
+    anyMatch=true;
+    const{done,total}=catStats(cat.id);
+    const pct=total?Math.round(done/total*100):0;
+    const block=document.createElement('div');
+    block.className='section-block'+(S.collapsed[cat.id]&&!S.searchQ?' collapsed':'');
+    const name=S.lang==='bn'?cat.bn:cat.en;
+    const hdr=document.createElement('div');
+    hdr.className='section-block-hdr';
+    hdr.innerHTML=`
+      <div class="section-block-ico">${cat.emoji}</div>
+      <div class="section-block-info"><div class="section-block-name">${name}</div><div class="section-block-sub">${done}/${total} ${S.lang==='bn'?'সম্পন্ন':'completed'}</div></div>
+      <div class="section-block-pct">${pct}%</div>
+      <svg class="section-block-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+    hdr.addEventListener('click',()=>{
+      S.collapsed[cat.id]=!S.collapsed[cat.id];
+      block.classList.toggle('collapsed');
+    });
+    block.appendChild(hdr);
+    const itemsWrap=document.createElement('div');
+    itemsWrap.className='section-block-items';
+    items.forEach(item=>{
+      const dn=isDone(item.id),pt=isPartial(item.id);
+      const cnt=S.counts[item.id]||0;
+      const isCounter=item.target>1;
+      const div=document.createElement('div');
+      div.className='li';
+      const sub=S.lang==='bn'?item.bn:item.en;
+      const subCls=S.lang==='bn'?'li-tr bn':'li-tr';
+      let rightHtml='';
+      if(dn)rightHtml=`<div class="li-check"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>`;
+      else if(pt)rightHtml=`<div class="li-partial"><div class="li-partial-inner"></div></div>`;
+      else if(isCounter)rightHtml=`<div class="li-badge">${cnt}/${item.target}</div>`;
+      div.innerHTML=`
+        <div class="li-ico"><span class="li-ico-emoji">${cat.emoji}</span>${isCounter?`<span class="li-ico-num">${item.target}×</span>`:''}</div>
+        <div class="li-body"><div class="li-ar">${item.arabic}</div><div class="${subCls}">${sub}</div></div>
+        <div class="li-right">${rightHtml}</div>`;
+      div.addEventListener('click',()=>{S.idx=item.id;openModal();});
+      itemsWrap.appendChild(div);
+    });
+    block.appendChild(itemsWrap);
+    wrap.appendChild(block);
+  });
+  if(!anyMatch){
+    const empty=document.createElement('div');
+    empty.style.cssText='text-align:center;padding:40px 20px;color:var(--t3);font-size:14px;font-weight:600';
+    empty.textContent=tr('noResult');
+    wrap.appendChild(empty);
+  }
+  updateMiniProgress();
+}
+
+// ── POPUP MODAL ──
+function modalSiblingItems(){
+  const item=D.find(x=>x.id===S.idx);if(!item)return D;
+  return D.filter(x=>x.cat===item.cat);
+}
+function renderModal(){
+  const item=D.find(x=>x.id===S.idx);if(!item)return;
+  const cat=CATS.find(c=>c.id===item.cat)||CATS[0];
+  const siblings=modalSiblingItems();
+  const li=siblings.findIndex(x=>x.id===S.idx);
+  $('#modalCat').textContent=(S.lang==='bn'?cat.bn:cat.en)+' '+cat.emoji;
+  $('#modalName').textContent=item.arabic.split(' ').slice(0,3).join(' ');
+  $('#dAr').textContent=item.arabic;
+  $('#trLbl').textContent=tr('tr');
+  const dt=$('#dTr');dt.textContent=S.lang==='bn'?item.bn:item.en;dt.className='tr-txt'+(S.lang==='bn'?' bn':'');
+  $('#dRef').textContent=item.ref||'';
+  const isCounter=item.target>1;
+  $('#cntCard').style.display=isCounter?'':'none';
+  $('#duaTag').style.display=isCounter?'none':'';
+  if(isCounter){
+    $('#tapN').textContent=S.counts[item.id]||0;
+    $('#tapL').textContent=tr('tp');
+    $('#tgtL').textContent=tr('tgt');
+    $('#tgtN').textContent=item.target;
+    $('#rstL').textContent=tr('rst');
+    updateRing();
+  }
+  $('#duaL').textContent=tr('du');
+  $('#prevBtn').disabled=li<=0;$('#nextBtn').disabled=li>=siblings.length-1;
+  $('#prevL').textContent=tr('pv');$('#nextL').textContent=tr('nx');
+  $('#dnCtr').textContent=`${li+1} / ${siblings.length}`;
+}
+function openModal(){
+  applyTheme();
+  $('#modalBackdrop').classList.add('open');
+  renderModal();
+}
+function closeModal(){
+  $('#modalBackdrop').classList.remove('open');
+  renderSections();
+  updateMiniProgress();
+}
+
+function increment(){
+  const item=D.find(x=>x.id===S.idx);if(!item)return;
+  const cnt=(S.counts[item.id]||0)+1;S.counts[item.id]=cnt;sc();
+  const tn=$('#tapN');tn.textContent=cnt;
+  tn.classList.remove('pop');void tn.offsetWidth;tn.classList.add('pop');setTimeout(()=>tn.classList.remove('pop'),320);
+  const tb=$('#tapBtn');tb.classList.remove('bounce','pulse');void tb.offsetWidth;tb.classList.add('bounce','pulse');setTimeout(()=>tb.classList.remove('bounce','pulse'),400);
+  updateRing();
+  if(cnt>=item.target){
+    const siblings=modalSiblingItems();const li=siblings.findIndex(x=>x.id===S.idx);
+    toast(tr('rch'));
+    setTimeout(()=>{
+      if(li<siblings.length-1){S.idx=siblings[li+1].id;renderModal();}
+      else{toast(tr('dn'));renderModal();}
+    },750);
+  }
+}
+function resetCount(){
+  S.counts[S.idx]=0;sc();
+  const tn=$('#tapN');if(tn)tn.textContent=0;
+  updateRing();
+}
+
+function setLang(lang){
+  S.lang=lang;sp();
+  $$('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  applyLabels();renderSections();
+  if($('#modalBackdrop').classList.contains('open'))renderModal();
+  if($('#progScreen').classList.contains('open'))renderProgress();
+}
+function applyLabels(){
+  $('#greeting').textContent=tr('g');
+  $('#tagline').textContent=tr('tg');
+  $('#nlHome').textContent=tr('ho');
+  $('#nlSearch').textContent=tr('srch');
+  $('#nlProgress').textContent=tr('prog');
+  $('#nlSettings').textContent=tr('st');
+  $('#stTitle').textContent=tr('st');
+  $('#stLangL').textContent=tr('sl');
+  $('#stLangRow').textContent=tr('slr');
+  $('#stLangSub').textContent=tr('sls');
+  $('#stFontL').textContent=tr('sf');
+  $('#stThemeL').textContent=tr('sth');
+  $('#autoL').textContent=tr('sa');
+  const si=$('#searchInp');if(si)si.placeholder=tr('searchPh');
+  const pt=$('#progTitle');if(pt)pt.textContent=tr('progTitle');
+  const ra=$('#resetAllBtn');if(ra)ra.textContent='🗑 '+tr('resetAll');
+  const il=$('#installAppLbl');if(il)il.textContent=tr('installApp');
+}
+
+function openProgress(){
+  applyTheme();
+  $('#progScreen').classList.add('open');
+  renderProgress();
+  $$('.ni').forEach(n=>n.classList.remove('active'));
+  $('#navProgress').classList.add('active');
+}
+function closeProgress(){
+  $('#progScreen').classList.remove('open');
+}
+function renderProgress(){
+  const{done,total}=totalStats();
+  const pct=total?Math.round(done/total*100):0;
+  const sg=$('#statGrid');
+  if(sg)sg.innerHTML=`
+    <div class="stat-card"><div class="stat-num">${done}</div><div class="stat-lbl">${tr('totalDone')}</div></div>
+    <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-lbl">${tr('totalItems')}</div></div>
+    <div class="stat-card"><div class="stat-num">${pct}%</div><div class="stat-lbl">${tr('pctDone')}</div></div>`;
+  const cpl=$('#catProgList');if(!cpl)return;
+  cpl.innerHTML='';
+  CATS.forEach(cat=>{
+    const{done:cd,total:ct}=catStats(cat.id);if(ct===0)return;
+    const cpct=ct?Math.round(cd/ct*100):0;
+    const card=document.createElement('div');
+    card.className='prog-cat-card';
+    const name=S.lang==='bn'?cat.bn:cat.en;
+    card.innerHTML=`
+      <div class="prog-cat-row">
+        <div class="prog-cat-ico">${cat.emoji}</div>
+        <div class="prog-cat-info"><div class="prog-cat-name">${name}</div><div class="prog-cat-sub">${cd}/${ct} items</div></div>
+        <div class="prog-cat-pct">${cpct}%</div>
+      </div>
+      <div class="prog-cat-bar"><div class="prog-cat-fill" style="width:${cpct}%"></div></div>`;
+    const itemsDiv=document.createElement('div');itemsDiv.className='prog-items-list';itemsDiv.style.display='none';
+    D.filter(x=>x.cat===cat.id).forEach(item=>{
+      const dn=isDone(item.id);const cnt=S.counts[item.id]||0;
+      const row=document.createElement('div');row.className='prog-item';
+      let chkHtml='';
+      if(dn)chkHtml=`<div style="width:16px;height:16px;border-radius:50%;background:var(--acc);display:grid;place-items:center"><svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>`;
+      else if(cnt>0)chkHtml=`<div style="width:16px;height:16px;border-radius:50%;border:2px solid var(--acc);display:grid;place-items:center"><div style="width:7px;height:7px;border-radius:50%;background:var(--acc)"></div></div>`;
+      else chkHtml=`<div style="width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2)"></div>`;
+      row.innerHTML=`<div class="prog-item-ar">${item.arabic}</div><div class="prog-item-cnt">${cnt}/${item.target}</div>`;
+      const chkWrap=document.createElement('div');chkWrap.innerHTML=chkHtml;row.appendChild(chkWrap.firstElementChild);
+      row.addEventListener('click',(e)=>{e.stopPropagation();S.idx=item.id;closeProgress();openModal();});
+      itemsDiv.appendChild(row);
+    });
+    let expanded=false;
+    card.addEventListener('click',()=>{expanded=!expanded;itemsDiv.style.display=expanded?'block':'none';});
+    card.appendChild(itemsDiv);
+    cpl.appendChild(card);
+  });
+}
+
+function openSettings(){$('#settPanel').classList.add('open');buildThGrid();$$('.ni').forEach(n=>n.classList.remove('active'));$('#navSettings').classList.add('active');}
+function closeSettings(){$('#settPanel').classList.remove('open');}
+function buildThGrid(){
+  const g=$('#thGrid');if(!g)return;g.innerHTML='';
+  TH.forEach(tm=>{
+    const b=document.createElement('button');b.className='th-btn'+(S.mt===tm.id?' active':'');b.dataset.tid=tm.id;
+    b.innerHTML=`<div class="th-dot" style="background:${tm.c}">${tm.e}</div><div><div class="th-name">${tm.name}</div><div class="th-sub">${tm.s<0?'Manual':tm.id}</div></div>`;
+    b.addEventListener('click',()=>{S.mt=tm.id;sp();applyTheme();$$('.th-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');$$('.auto-btn').forEach(x=>x.classList.remove('active'));});
+    g.appendChild(b);
+  });
+}
+
+$('#settingsBtn').addEventListener('click',openSettings);
+$('#navSettings').addEventListener('click',openSettings);
+$('#stClose').addEventListener('click',closeSettings);
+$('#settPanel').addEventListener('click',e=>{if(e.target===$('#settPanel'))closeSettings();});
+$('#autoBtn').addEventListener('click',()=>{S.mt=null;sp();applyTheme();buildThGrid();});
+$('#sLangEn').addEventListener('click',()=>setLang('en'));
+$('#sLangBn').addEventListener('click',()=>setLang('bn'));
+$('#dlEn').addEventListener('click',()=>setLang('en'));
+$('#dlBn').addEventListener('click',()=>setLang('bn'));
+$('#fsSl').addEventListener('input',e=>{S.fs=+e.target.value;document.documentElement.style.setProperty('--fs',S.fs);sp();});
+$('#modalClose').addEventListener('click',closeModal);
+$('#modalBackdrop').addEventListener('click',e=>{if(e.target===$('#modalBackdrop'))closeModal();});
+$('#tapBtn').addEventListener('click',increment);
+$('#rstBtn').addEventListener('click',resetCount);
+$('#prevBtn').addEventListener('click',()=>{const sib=modalSiblingItems();const li=sib.findIndex(x=>x.id===S.idx);if(li>0){S.idx=sib[li-1].id;renderModal();}});
+$('#nextBtn').addEventListener('click',()=>{const sib=modalSiblingItems();const li=sib.findIndex(x=>x.id===S.idx);if(li<sib.length-1){S.idx=sib[li+1].id;renderModal();}});
+$('#progressBtn').addEventListener('click',openProgress);
+$('#navProgress').addEventListener('click',openProgress);
+$('#progBackBtn').addEventListener('click',closeProgress);
+$('#resetAllBtn').addEventListener('click',()=>{if(confirm(tr('confirmReset'))){S.counts={};sc();renderSections();renderProgress();updateMiniProgress();toast('🗑 Reset done');}});
+$('#navHome').addEventListener('click',()=>{closeProgress();closeModal();$$('.ni').forEach(n=>n.classList.remove('active'));$('#navHome').classList.add('active');});
+$('#navSearch').addEventListener('click',()=>{$$('.ni').forEach(n=>n.classList.remove('active'));$('#navSearch').classList.add('active');const si=$('#searchInp');if(si){si.focus();si.scrollIntoView({behavior:'smooth',block:'center'});}});
+$('#searchInp').addEventListener('input',e=>{S.searchQ=e.target.value;renderSections();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if($('#settPanel').classList.contains('open'))closeSettings();
+    else if($('#progScreen').classList.contains('open'))closeProgress();
+    else if($('#modalBackdrop').classList.contains('open'))closeModal();
+  }
+  if($('#modalBackdrop').classList.contains('open')){
+    if(e.key===' '||e.key==='Enter'){e.preventDefault();const item=D.find(x=>x.id===S.idx);if(item&&item.target>1)increment();}
+    else if(e.key==='ArrowRight')$('#nextBtn').click();
+    else if(e.key==='ArrowLeft')$('#prevBtn').click();
+    else if(e.key==='r'||e.key==='R')resetCount();
+  }
+});
+window.addEventListener('online',()=>{const ob=$('#offBadge');if(ob)ob.style.display='none';});
+window.addEventListener('offline',()=>{const ob=$('#offBadge');if(ob)ob.style.display='block';});
+setInterval(()=>{if(!S.mt)applyTheme();},60000);
+
+// ── REAL SERVICE WORKER REGISTRATION ──
+// sw.js and manifest.json are real files served alongside index.html.
+// This is what actually makes "Install App" / "Add to Home Screen" work.
+function regSW(){
+  if(!('serviceWorker' in navigator))return;
+  navigator.serviceWorker.register('sw.js').then(reg=>{
+    console.log('Azkar: service worker registered', reg.scope);
+    // Once the SW reaches 'activated', the app shell has finished precaching
+    // and is genuinely ready for offline use — confirm this quietly.
+    if(reg.installing){
+      reg.installing.addEventListener('statechange',function(){
+        if(this.state==='activated'){
+          console.log('Azkar: offline cache ready');
+        }
+      });
+    } else if(reg.active){
+      console.log('Azkar: offline cache already ready');
+    }
+  }).catch(err=>{
+    console.warn('Azkar: service worker registration failed', err);
+  });
+}
+
+// ── INSTALL PROMPT (Android/Chrome/Edge) ──
+let deferredInstallPrompt=null;
+window.addEventListener('beforeinstallprompt',(e)=>{
+  e.preventDefault();
+  deferredInstallPrompt=e;
+  showInstallHint();
+});
+window.addEventListener('appinstalled',()=>{
+  deferredInstallPrompt=null;
+  toast(S.lang==='bn'?'✓ অ্যাপ ইন্সটল হয়েছে':'✓ App installed');
+  hideInstallHint();
+});
+function showInstallHint(){
+  // Surface the native install button inside Settings, only when actually installable
+  const btn=document.getElementById('installAppBtn');
+  if(btn) btn.style.display='flex';
+}
+function hideInstallHint(){
+  const btn=document.getElementById('installAppBtn');
+  if(btn) btn.style.display='none';
+}
+function triggerInstall(){
+  if(!deferredInstallPrompt)return;
+  deferredInstallPrompt.prompt();
+  deferredInstallPrompt.userChoice.then(choice=>{
+    deferredInstallPrompt=null;
+    hideInstallHint();
+  });
+}
+const installBtnEl=document.getElementById('installAppBtn');
+if(installBtnEl) installBtnEl.addEventListener('click',triggerInstall);
+
+// Detect standalone/installed mode to hide install prompts if already installed
+function isStandalone(){
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone===true;
+}
+
+(function(){
+  $('#fsSl').value=S.fs;
+  document.documentElement.style.setProperty('--fs',S.fs);
+  $$('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===S.lang));
+  updateDate();setInterval(updateDate,60000);
+  applyTheme();applyLabels();buildThGrid();
+  renderSections();updateMiniProgress();
+  if(!navigator.onLine){const ob=$('#offBadge');if(ob)ob.style.display='block';}
+  regSW();
+  if(isStandalone()) hideInstallHint();
+  setTimeout(()=>toast(tr('wl')),900);
+})();
+</script>
+</body>
+</html>

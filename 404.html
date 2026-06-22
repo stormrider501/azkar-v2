@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8"/>
+<script>
+  // GitHub Pages 404 redirect trick: preserve the path and let the SW handle it
+  var path = window.location.pathname;
+  var repo = path.split('/')[1]; // e.g. "azkar-"
+  sessionStorage.setItem('ghpages_redirect', JSON.stringify({
+    path: path, query: window.location.search
+  }));
+  window.location.replace('/' + repo + '/');
+</script>
+</head><body></body></html>

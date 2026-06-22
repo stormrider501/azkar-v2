@@ -1,0 +1,52 @@
+{
+  "name": "Azkar — Daily Duas",
+  "short_name": "Azkar",
+  "description": "Morning, Evening, Sleep, Sorrow and more duas — Arabic with Bangla & English. Works offline.",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "portrait-primary",
+  "background_color": "#0d1033",
+  "theme_color": "#0d1033",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["lifestyle", "religion", "education"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Morning Azkar",
+      "short_name": "Morning",
+      "description": "Jump to morning duas",
+      "url": "/?section=morning",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Evening Azkar",
+      "short_name": "Evening",
+      "description": "Jump to evening duas",
+      "url": "/?section=evening",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

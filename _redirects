@@ -1,0 +1,2 @@
+# Netlify: serve index.html for all paths so the SW can intercept navigations
+/*    /index.html    200
